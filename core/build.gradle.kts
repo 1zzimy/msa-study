@@ -13,9 +13,6 @@ dependencies {
     implementation("org.springframework:spring-web")
     implementation("org.springframework:spring-context")
 
-    // Jackson Kotlin Module (직렬화/역직렬화)
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-
     // Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 

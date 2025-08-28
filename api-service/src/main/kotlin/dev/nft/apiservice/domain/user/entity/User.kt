@@ -5,7 +5,7 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "users")
-class User(
+open class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val userId: Long? = null, // PK는 보통 val (DB가 넣어주는 값)

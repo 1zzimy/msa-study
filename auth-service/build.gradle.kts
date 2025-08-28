@@ -1,9 +1,9 @@
 plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
-    kotlin("jvm") version "2.0.20" // Kotlin 지원
-    kotlin("plugin.spring") version "2.0.20" // Spring 과 Kotlin 통합
-    kotlin("plugin.jpa") version "2.0.20" // JPA no-arg 생성자
+    kotlin("jvm")
+    kotlin("plugin.spring")
+    kotlin("plugin.jpa")
     java
 }
 

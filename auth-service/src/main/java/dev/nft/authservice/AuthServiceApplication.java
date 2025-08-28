@@ -6,9 +6,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@SpringBootApplication(
-    scanBasePackages = { "dev.nft" }               // 전역 스캔
-)
+@SpringBootApplication
 @EnableDiscoveryClient
 public class AuthServiceApplication {
 	

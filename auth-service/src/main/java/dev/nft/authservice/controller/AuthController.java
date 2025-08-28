@@ -5,18 +5,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.nft.authservice.common.util.ApiResult;
+import dev.nft.core.common.util.ApiResult;
 import dev.nft.authservice.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
-
 @Tag(name = "Auth", description = "인증 API")
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 	private final AuthService authService;
+	
+	public AuthController(AuthService authService) {
+		this.authService = authService;
+	}
 
 	@PostMapping("/login")
 	@Operation(summary = "로그인")

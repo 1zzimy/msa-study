@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.nft.apiservice.common.util.ApiResult;
+import dev.nft.apiservice.domain.user.dto.UserCreateRequestDto;
 import dev.nft.apiservice.domain.user.dto.UserInfoResponseDto;
 import dev.nft.apiservice.domain.user.dto.UserUpdateRequestDto;
 import dev.nft.apiservice.domain.user.service.UserService;
@@ -25,7 +26,8 @@ public class UserController {
 
 	@PostMapping
 	@Operation(summary = "회원가입")
-	public ResponseEntity<?> createUser() {
+	public ResponseEntity<?> createUser(UserCreateRequestDto request) {
+		userService.register(request);
 		return ResponseEntity.ok(ApiResult.success("회원가입 성공"));
 	}
 

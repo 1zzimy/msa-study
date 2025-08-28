@@ -3,17 +3,16 @@ plugins {
     id("io.spring.dependency-management")
     kotlin("jvm")
     kotlin("plugin.spring")
-    java
 }
 
 dependencies {
     // Core Module
     implementation(project(":core"))
-    
+
     // Kotlin
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    
+
     // Gateway (필수)
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")
 

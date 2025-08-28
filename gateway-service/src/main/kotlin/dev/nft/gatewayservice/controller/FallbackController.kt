@@ -1,4 +1,4 @@
-package dev.nft.gatewayservice.config
+package dev.nft.gatewayservice.controller
 
 import dev.nft.core.common.util.logger
 import org.springframework.http.HttpStatus
@@ -13,7 +13,7 @@ import java.time.LocalDateTime
 @RequestMapping("/fallback")
 class FallbackController {
     private val log = this.logger()
-    
+
     @GetMapping("/api")
     fun apiFallback(): Mono<ResponseEntity<Map<String, Any>>> {
         log.warn("API Service fallback triggered")
@@ -28,7 +28,7 @@ class FallbackController {
                 )
         )
     }
-    
+
     @GetMapping("/auth")
     fun authFallback(): Mono<ResponseEntity<Map<String, Any>>> {
         log.warn("Auth Service fallback triggered")

@@ -9,14 +9,18 @@ import dev.nft.apiservice.domain.user.dto.UserUpdateRequestDto;
 import dev.nft.apiservice.domain.user.entity.User;
 import dev.nft.apiservice.domain.user.mapper.UserMapper;
 import dev.nft.apiservice.domain.user.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+
 
 @Service
-@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 	private final UserMapper userMapper;
+	
+	public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
+		this.userRepository = userRepository;
+		this.userMapper = userMapper;
+	}
 
 	// 회원 가입
 	public void register(UserCreateRequestDto request) {

@@ -1,7 +1,7 @@
 plugins {
     java
-    kotlin("jvm") version "2.0.20"
-    kotlin("plugin.spring") version "2.0.20"
+    kotlin("jvm")
+    kotlin("plugin.spring")
 }
 
 dependencies {

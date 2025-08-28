@@ -13,41 +13,66 @@ spring:
     name: gateway-service
   cloud:
     gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "http://localhost:3000"
-            allow-credentials: true   #추가
-            allowedHeaders:
-              - x-requested-with
-              - authorization
-              - content-type
-              - credential
-              - X-AUTH-TOKEN
-              - X-CSRF-TOKEN
-            allowedMethods:
-              - POST
-              - GET
-              - PUT
-              - OPTIONS
-              - DELETE
+      server:
+        webflux:
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedorigins: "http://localhost:3000"
+                allow-credentials: true
+                allowedheaders:
+                  - x-requested-with
+                  - authorization
+                  - content-type
+                  - credential
+                  - X-AUTH-TOKEN
+                  - X-CSRF-TOKEN
+                allowedmethods:
+                  - POST
+                  - GET
+                  - PUT
+                  - OPTIONS
+                  - DELETE
+          httpclient:
+            connect-timeout: 1000
+            response-timeout: 3s
+          metrics:
+            enabled: true
+            tags:
+              service: gateway-service
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
-        - name: GlobalFilter
-          args:
-            baseMessage: Spring Cloud Gateway Global Filter
-            preLogger: true
-            postLogger: true
-      routes:
-        - id:
-          uri:
-          predicates:
-            - Path=
-            - Method=
-          filters:
-            - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - AuthorizationHeaderFilter
+      # 라우트는 GatewayConfig.kt에서 정의하므로 여기서는 제거
+
+# Actuator 설정 (모니터링)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,gateway
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+  # Circuit Breaker 설정
+  resilience4j:
+    circuitbreaker:
+      instances:
+        api-service:
+          sliding-window-size: 10
+          failure-rate-threshold: 50
+          wait-duration-in-open-state: 10s
+          permitted-number-of-calls-in-half-open-state: 3
+        auth-service:
+          sliding-window-size: 10
+          failure-rate-threshold: 50
+          wait-duration-in-open-state: 10s
+          permitted-number-of-calls-in-half-open-state: 3
 
 token:
   secret: user_token

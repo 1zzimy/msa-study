@@ -3,8 +3,9 @@ server:
 
 spring:
   application:
-    name: discoveryservice
+    name: discovery-service
 
+# 이 부분이 추가되면, 유레카 서버에 해당 서비스를 유레카 클라이언트로 등록하지 않겠다는 의미
 eureka:
   client:
     fetch-registry: false

@@ -1,46 +1,41 @@
 plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
+    kotlin("jvm")
+    kotlin("plugin.spring")
+    kotlin("plugin.jpa")
     java
-    kotlin("jvm") version "2.0.20" // Kotlin 지원
-    kotlin("plugin.spring") version "2.0.20" // Spring 과 Kotlin 통합
 }
 
 dependencies {
+    // Core Module
+    implementation(project(":core"))
+    
     // Kotlin
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-    // Spring Web
+    
+    // Spring Boot Starter
     implementation("org.springframework.boot:spring-boot-starter-web")
-
-    // JPA
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-
-    // DB
-    runtimeOnly("com.mysql:mysql-connector-j")
-
-    // Lombok
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
-    testCompileOnly("org.projectlombok:lombok")
-    testAnnotationProcessor("org.projectlombok:lombok")
-
-    // Swegger
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 
     // Eureka Service Client - Discovery
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
-    // Autuator (healthcheck, monitoring)
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    // Database
+    runtimeOnly("mysql:mysql-connector-java:8.0.33")
 
-    // Logging - Log4j2
-    implementation("org.springframework.boot:spring-boot-starter-log4j2")
+    // Swagger
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 
     // MapStruct
     implementation("org.mapstruct:mapstruct:1.5.5.Final")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+
+    // Lombok (Java 코드용)
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")

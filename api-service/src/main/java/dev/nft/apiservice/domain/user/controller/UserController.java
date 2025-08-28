@@ -8,21 +8,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.nft.apiservice.common.util.ApiResult;
+import dev.nft.apiservice.domain.user.service.UserService;
+import dev.nft.core.common.util.ApiResult;
 import dev.nft.apiservice.domain.user.dto.UserCreateRequestDto;
 import dev.nft.apiservice.domain.user.dto.UserInfoResponseDto;
 import dev.nft.apiservice.domain.user.dto.UserUpdateRequestDto;
-import dev.nft.apiservice.domain.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 
 @Tag(name = "User", description = "사용자 정보 API")
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/v1/user")
 public class UserController {
 	private final UserService userService;
+	
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
 
 	@PostMapping
 	@Operation(summary = "회원가입")

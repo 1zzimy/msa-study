@@ -5,6 +5,24 @@ spring:
   application:
     name: auth-service
 
+  security:
+    oauth2:
+      client:
+        registration:
+          ssafy: # registrationId
+            client-id: ${SSAFY_CLIENT_ID}
+            client-secret: ${SSAFY_CLIENT_SECRET}
+            scope:
+              - email
+              - name
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+        provider:
+          ssafy:
+            authorization-uri: ${SSAFY_AUTHORIZATION_URI}
+            token-uri: ${SSAFY_TOKEN_URI}
+            user-info-uri: ${SSAFY_USER_INFO_URI}
+            user-info-authentication-method: header
+
 eureka:
   instance:
     instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
